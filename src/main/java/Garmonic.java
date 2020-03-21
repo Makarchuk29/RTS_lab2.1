@@ -1,3 +1,4 @@
+import tableWpkn.Table;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -21,11 +22,12 @@ public class Garmonic {
         double[] dft_real = new double[N];
         double[] dft_image = new double[N];
         double[] dft_final = new double[N];
-
+        Table tableWpkN = new Table(N);
+        tableWpkN.createTable();
         for (int p = 0; p < N; p++) {
             for (int k = 0; k < N; k++) {
-                dft_real[p] += sygnalsOfResultingGarmonic[k] * WReal(p,k,N);
-                dft_image[p] += sygnalsOfResultingGarmonic[k] *WImage(p,k,N);
+                dft_real[p] += sygnalsOfResultingGarmonic[k] * tableWpkN.get(p,k).getReal();
+                dft_image[p] += sygnalsOfResultingGarmonic[k] * tableWpkN.get(p,k).getImage();
             }
             dft_final[p] = Math.sqrt(Math.pow(dft_real[p],2) +
                     Math.pow(dft_image[p],2));
@@ -35,14 +37,6 @@ public class Garmonic {
 
     public List<Double> calculateDFT(){
         return calculateDFT(getSygnalsForResultingGarmonic());
-    }
-
-    private double WReal(int p, int k, int N){
-        return Math.cos(2*Math.PI*p*k/N);
-    }
-
-    private double WImage(int p, int k, int N){
-        return Math.sin(2*Math.PI*p*k/N);
     }
 
     public List<Number> calculateSygnalsForResultingGarmonic(){

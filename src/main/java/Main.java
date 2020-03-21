@@ -23,7 +23,6 @@ public class Main {
         chart.addSeries("Fourier Function", xData, garmonic.calculateDFT());
 
         new SwingWrapper<>(chart).displayChart();
-
     }
 
     private static List<Double> initializationXData(int countOfDiscreteCalls) {
